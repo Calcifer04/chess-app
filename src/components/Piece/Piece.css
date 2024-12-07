@@ -1,0 +1,17 @@
+.piece {
+    font-size: 4em;
+    cursor: move;
+    transform: translate(0, 0);
+  }
+
+  @media (max-width: 900px) {
+    .piece {
+      font-size: 3em;
+    }
+  }
+  
+  @media (max-width: 700px) {
+    .piece {
+      font-size: 2em;
+    }
+  }

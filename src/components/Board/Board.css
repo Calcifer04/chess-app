@@ -1,0 +1,10 @@
+.board {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  width: clamp(300px, 80vw, 800px);
+  height: clamp(300px, 80vw, 800px);
+  border: 1px solid black;
+  gap: 1px;
+}
+  
