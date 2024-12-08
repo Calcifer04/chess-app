@@ -4,7 +4,12 @@
   grid-template-rows: repeat(8, 1fr);
   width: clamp(300px, 80vw, 800px);
   height: clamp(300px, 80vw, 800px);
-  border: 1px solid black;
-  gap: 1px;
+}
+
+@media (max-width: 1600px) {
+  .board {
+    width: 700px; 
+    height: 700px;
+  }
 }
   

@@ -1,7 +1,7 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #282c34;
+    background-color: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -10,7 +10,12 @@ body {
 
 h1 {
   font-size: 25px;
-  margin: 2px;
+  margin-bottom: 2px;
+  display: inline-block;
+  font-family: "Nunito", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
 } 
 
 p {
@@ -18,7 +23,7 @@ p {
 }
 
 .white {
-  color: white;
+  color: black;
 }
 
 .black {

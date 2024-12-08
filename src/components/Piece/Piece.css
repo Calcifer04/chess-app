@@ -1,5 +1,4 @@
 .piece {
-    font-size: 4em;
     cursor: move;
     transform: translate(0, 0);
   }
@@ -14,4 +13,9 @@
     .piece {
       font-size: 2em;
     }
+  }
+
+  img {
+    width: 60px;
+    height: auto;
   }

@@ -1,4 +1,5 @@
 import { Chess } from "chess.js";
+import { playSound } from "../utils/playSound.ts"; // Import the sound utility
 
 export class Game {
   private chess: Chess;
@@ -13,7 +14,14 @@ export class Game {
 
   makeMove(from: string, to: string): boolean {
     const move = this.chess.move({ from, to }); 
-    console.log('makeMove called:', from, to);
+    console.log('makeMove called:', move);
+    if (move.captured) {
+      playSound("Capture.mp3")
+      console.log(`Captured on ${to}`)
+    } else {
+      playSound("Move.mp3")
+    }
+    console.log()
     
     console.log(this.chess.ascii())
     return !!move; // Return true if the move is valid

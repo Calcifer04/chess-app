@@ -4,8 +4,8 @@ import "./Piece.css";
 
 interface PieceProps {
   id: string;
-  type: string;
-  color: "w" | "b";
+  type: string; // Piece type, e.g., 'p' for pawn, 'r' for rook
+  color: "w" | "b"; // Piece color, 'w' for white, 'b' for black
 }
 
 const Piece: React.FC<PieceProps> = ({ id, type, color }) => {
@@ -16,17 +16,23 @@ const Piece: React.FC<PieceProps> = ({ id, type, color }) => {
       isDragging: monitor.isDragging(),
     }),
   }));
-  
-  console.log('Dragging:', isDragging, id);
 
-  const pieceSymbols: Record<string, string> = {
-    p: "♟",
-    r: "♜",
-    n: "♞",
-    b: "♝",
-    q: "♛",
-    k: "♚",
+  // Mapping the piece types to their respective names in the naming convention
+  const pieceNames: Record<string, string> = {
+    p: "Pawn",
+    r: "Rook",
+    n: "Knight",
+    b: "Bishop",
+    q: "Queen",
+    k: "King",
   };
+
+  // Construct the filename based on the type and color
+  const pieceName = pieceNames[type]; // Get the piece name from the type (e.g., 'Pawn', 'Rook')
+  const side = color === "w" ? "White" : "Black"; // Determine side (White or Black)
+
+  // Construct the image path based on the naming convention
+  const imagePath = `../../assets/Piece=${pieceName}, Side=${side}.png`;
 
   return (
     <div
@@ -34,7 +40,7 @@ const Piece: React.FC<PieceProps> = ({ id, type, color }) => {
       className="piece"
       style={{ color: color === "w" ? "white" : "black" }}
     >
-      {pieceSymbols[type]}
+      <img src={imagePath} alt={`${side}-${pieceName}`} />
     </div>
   );
 };

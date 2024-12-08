@@ -18,8 +18,9 @@ const App: React.FC = () => {
   return (
     <DndProvider backend={HTML5Backend}>
       <div className="top-label">
-        <h1> Current Turn:</h1>
-        <h1 className= {turn === "w" ? "white" : "black"}>{turn === "w" ? "White" : "Black"}</h1>
+        <h1 className= {turn === "w" ? "white" : "black"}>
+          {turn === "w" ? "White" : "Black"}
+        </h1>
       </div>
       <Board board={game.getBoard()} onMove={handleMove} />
     </DndProvider>

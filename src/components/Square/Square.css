@@ -6,17 +6,17 @@
     height: 100%;
   }
 .square.light {
-  background-color: #646096;
+  background-color: rgba(229, 229, 229, 1);
 }
 .square.dark {
-  background-color: #56504b;
+  background-color: rgba(183, 192, 216, 1);
 }
 
-.square.selected {
+/* .square.selected {
   width: 97%;
   height: 97%;
   border: 2px solid rgb(131, 204, 122);
   box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.604);
-}
+} */
 
   
