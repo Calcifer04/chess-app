@@ -6,11 +6,13 @@ interface PieceProps {
   id: string;
   type: string;
   color: "w" | "b";
+  isCaptured?: boolean;
 }
 
-const Piece: React.FC<PieceProps> = ({ id, type, color }) => {
-  const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
-    id,
+const Piece: React.FC<PieceProps> = ({ id, type, color, isCaptured }) => {
+  const { attributes, listeners, setNodeRef, transform } = useDraggable({
+    id: id,
+    disabled: isCaptured
   });
 
   // Map chess piece types to SVG filenames
@@ -32,7 +34,7 @@ const Piece: React.FC<PieceProps> = ({ id, type, color }) => {
       ref={setNodeRef}
       {...listeners}
       {...attributes}
-      className={`piece ${isDragging ? "dragging" : ""} ${!id.startsWith('overlay-') ? '' : 'drag-overlay'}`}
+      className={`piece ${transform ? "dragging" : ""} ${!id.startsWith('overlay-') ? '' : 'drag-overlay'}`}
     >
       <img src={imagePath} alt={`${side} ${pieceName}`} />
     </div>

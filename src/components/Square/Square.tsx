@@ -8,9 +8,10 @@ interface SquareProps {
   position: string;
   onMove: (from: string, to: string) => void;
   activePiece?: string | null;
+  className?: string;
 }
 
-const Square: React.FC<SquareProps> = ({ piece, position, onMove, activePiece }) => {
+const Square: React.FC<SquareProps> = ({ piece, position, activePiece }) => {
   const { setNodeRef, isOver } = useDroppable({
     id: position,
   });

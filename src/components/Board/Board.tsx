@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import "./Board.css";
 import Square from "../Square/Square";
 import Piece from "../Piece/Piece";
-import { Game } from "../../game/Game";
 import { DndContext, DragOverlay } from "@dnd-kit/core";
 
 interface BoardProps {
-  board: ReturnType<Game["getBoard"]>;
+  board: any[][];
   onMove: (from: string, to: string) => void;
+  checkPosition?: string | null;
 }
 
-const Board: React.FC<BoardProps> = ({ board, onMove }) => {
+const Board: React.FC<BoardProps> = ({ board, onMove, checkPosition }) => {
   const [activePiece, setActivePiece] = useState<string | null>(null);
 
   const handleDragStart = (event: any) => {
@@ -27,6 +27,22 @@ const Board: React.FC<BoardProps> = ({ board, onMove }) => {
 
   const ranks = ["8", "7", "6", "5", "4", "3", "2", "1"];
   const files = ["a", "b", "c", "d", "e", "f", "g", "h"];
+
+  const getSquareClass = (position: string) => {
+    const file = position.charCodeAt(0) - 97; // 'a' -> 0, 'b' -> 1, etc.
+    const rank = 8 - parseInt(position[1]); // '1' -> 7, '2' -> 6, etc.
+    
+    let className = "square";
+    if ((file + rank) % 2 === 0) {
+      className += " white";
+    } else {
+      className += " black";
+    }
+    if (position === checkPosition) {
+      className += " in-check";
+    }
+    return className;
+  };
 
   return (
     <DndContext onDragEnd={handleDragEnd} onDragStart={handleDragStart}>
@@ -51,6 +67,7 @@ const Board: React.FC<BoardProps> = ({ board, onMove }) => {
                   position={position}
                   onMove={onMove}
                   activePiece={activePiece}
+                  className={getSquareClass(position)}
                 />
               );
             })
