@@ -1,21 +1,30 @@
 .piece {
-    cursor: move;
-    transform: translate(0, 0);
-  }
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  @media (max-width: 900px) {
-    .piece {
-      font-size: 3em;
-    }
-  }
-  
-  @media (max-width: 700px) {
-    .piece {
-      font-size: 2em;
-    }
-  }
+.piece img {
+  width: 80%;
+  height: 80%;
+  pointer-events: none;
+}
 
-  img {
-    width: 60px;
-    height: auto;
-  }
+.piece.dragging {
+  opacity: 0;  /* Makes the original piece semi-transparent while dragging */
+}
+
+/* Add styles for the dragging overlay */
+.drag-overlay {
+  cursor: grabbing;
+}
+
+.drag-overlay img {
+  transform: scale(1.9);  /* Makes the dragged piece slightly larger */
+  cursor: grabbing;
+}

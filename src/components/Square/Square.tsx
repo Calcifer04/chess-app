@@ -1,43 +1,34 @@
 import React from "react";
-import { useDrop } from "react-dnd";
-import Piece from "../Piece/Piece.tsx";
+import { useDroppable } from "@dnd-kit/core";
+import Piece from "../Piece/Piece";
 import "./Square.css";
 
 interface SquareProps {
   piece: { type: string; color: "w" | "b" } | null;
   position: string;
   onMove: (from: string, to: string) => void;
+  activePiece?: string | null;
 }
 
-const Square: React.FC<SquareProps> = ({ piece, position, onMove }) => {
-  const [, drop] = useDrop(() => ({
-    accept: "piece",
-    drop: (item: { id: string }) => {
-      console.log("Drop triggered:", item.id, position);
-      onMove(item.id, position);
-    },
-  }));
-
-  const [isSelected, setIsSelected] = React.useState(false);
-
-  const handleClick = () => {
-    setIsSelected(!isSelected);
-  };
+const Square: React.FC<SquareProps> = ({ piece, position, onMove, activePiece }) => {
+  const { setNodeRef, isOver } = useDroppable({
+    id: position,
+  });
 
   const isDark = (position.charCodeAt(0) + parseInt(position[1])) % 2 === 1;
+  const showHighlight = isOver && activePiece !== position;
 
   return (
     <div
-      onClick={handleClick}
-      ref={drop}
-      className={`square ${isDark ? "dark" : "light"} ${isSelected ? "selected" : ""}`}
+      ref={setNodeRef}
+      className={`square ${isDark ? "dark" : "light"}`}
     >
-      <div>
-        {piece && <Piece id={position} type={piece.type} color={piece.color} />}
+      {piece && <Piece id={position} type={piece.type} color={piece.color} />}
+      <div className={`${showHighlight ? "over" : ""}`}>
+
       </div>
     </div>
   );
 };
 
 export default Square;
-

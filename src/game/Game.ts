@@ -17,7 +17,6 @@ export class Game {
     console.log('makeMove called:', move);
     if (move.captured) {
       playSound("Capture.mp3")
-      console.log(`Captured on ${to}`)
     } else {
       playSound("Move.mp3")
     }
@@ -27,6 +26,14 @@ export class Game {
     return !!move; // Return true if the move is valid
   }
 
+  isPieceCaptured(move: any) {
+    if (move.captured) {
+      console.log(`Captured ${move.color === "b" ? "w" : "b"}, ${move.captured}`) 
+    
+    }
+    return move.color, move.captured
+  }
+
   isGameOver(): boolean {
     return this.chess.isGameOver();
   }
@@ -34,5 +41,4 @@ export class Game {
   getTurn(): string {
     return this.chess.turn(); // Returns 'w' for white, 'b' for black
   }
-  
 }
