@@ -3,6 +3,7 @@ import Board from "./components/Board/Board";
 import { useGame } from "./context/GameContext";
 import { DndContext } from "@dnd-kit/core";
 import Piece from "./components/Piece/Piece";
+import CustomizationMenu from './components/CustomizationMenu/CustomizationMenu';
 
 interface TimerState {
   white: number;
@@ -21,6 +22,11 @@ const App: React.FC = () => {
     black: 0,
     isRunning: false
   });
+  const [showCustomizationMenu, setShowCustomizationMenu] = useState(false);
+  const [lightSquareColor, setLightSquareColor] = useState('#E5E5E5');
+  const [darkSquareColor, setDarkSquareColor] = useState('#B7C0D8');
+  const [backgroundColor, setBackgroundColor] = useState('#FFFFFF');
+  const [textColor, setTextColor] = useState<'light' | 'dark'>('dark');
 
   useEffect(() => {
     let interval: ReturnType<typeof setInterval>;
@@ -36,6 +42,13 @@ const App: React.FC = () => {
 
     return () => clearInterval(interval);
   }, [timer.isRunning, turn]);
+
+  useEffect(() => {
+    document.documentElement.style.setProperty('--light-square-color', lightSquareColor);
+    document.documentElement.style.setProperty('--dark-square-color', darkSquareColor);
+    document.documentElement.style.setProperty('--background-color', backgroundColor);
+    document.documentElement.style.setProperty('--text-color', textColor === 'light' ? '#ffffff' : '#313131');
+  }, [lightSquareColor, darkSquareColor, backgroundColor, textColor]);
 
   const formatTime = (seconds: number): string => {
     const minutes = Math.floor(seconds / 60);
@@ -164,6 +177,9 @@ const App: React.FC = () => {
         <button className="new-game-btn" onClick={() => setShowNewGameModal(true)}>
           New Game
         </button>
+        <button className="customize-btn" onClick={() => setShowCustomizationMenu(true)}>
+          Customize
+        </button>
 
         {showNewGameModal && (
           <div className="modal">
@@ -179,6 +195,19 @@ const App: React.FC = () => {
             </div>
           </div>
         )}
+
+        <CustomizationMenu
+          isOpen={showCustomizationMenu}
+          onClose={() => setShowCustomizationMenu(false)}
+          lightSquareColor={lightSquareColor}
+          darkSquareColor={darkSquareColor}
+          backgroundColor={backgroundColor}
+          onLightSquareChange={setLightSquareColor}
+          onDarkSquareChange={setDarkSquareColor}
+          onBackgroundChange={setBackgroundColor}
+          textColor={textColor}
+          onTextColorChange={setTextColor}
+        />
       </div>
     </DndContext>
   );

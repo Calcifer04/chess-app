@@ -1,8 +1,9 @@
 .square.light {
-  background-color: rgba(229, 229, 229, 1);
+  background-color: var(--light-square-color);
 }
+
 .square.dark {
-  background-color: rgb(183, 192, 216);
+  background-color: var(--dark-square-color);
 }
 
 .square {

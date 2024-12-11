@@ -1,3 +1,10 @@
+:root {
+  --light-square-color: #E5E5E5;
+  --dark-square-color: #B7C0D8;
+  --background-color: #FFFFFF;
+  --text-color: #313131;
+}
+
 #root {
   top: center;
   position: absolute;
@@ -7,7 +14,7 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #ffffff;
+    background-color: var(--background-color);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -98,6 +105,7 @@ p {
   margin-bottom: 5px;
   text-align: center;
   width: 100%;
+  color: var(--text-color);
 }
 
 .captured-pieces.black .score {
@@ -126,18 +134,19 @@ p {
   font-weight: 700;
   padding: 12px 24px;
   border-radius: 10px;
-  color: #313131;
+  color: var(--text-color);
   min-width: 120px;
   text-align: center;
   font-family: "Nunito", sans-serif;
-  background-color: #f0f0f0;
+  background-color: var(--light-square-color);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   margin: 10px 0;
 }
 
 .black-timer {
   grid-row: 1;
-  background-color: rgba(183, 192, 216, 0.741);
+  background-color: var(--dark-square-color);
+  opacity: 0.741;
 }
 
 .white-timer {
@@ -223,12 +232,54 @@ p {
   position: absolute;
   left: calc(50% - 28.3px);
   bottom: 20px;
-  background-color: rgba(183, 192, 216, 0.741);
-  color: #313131;
+  background-color: var(--dark-square-color);
+  opacity: 0.741;
+  color: var(--text-color);
   font-family: "Nunito", sans-serif;
   font-weight: 600;
   border: none;
   border-radius: 8px;
   padding: 8px;
   cursor: pointer;
+}
+
+.customize-btn {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  padding: 12px 24px;
+  background-color: #4a4a4a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-family: "Nunito", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.customize-btn:hover {
+  background-color: #313131;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.rank-label, .file-label {
+  color: var(--text-color);
+}
+
+.color-picker-group select {
+  padding: 6px 12px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-family: "Nunito", sans-serif;
+  cursor: pointer;
+}
+
+.text-color-toggle {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #ddd;
 }
